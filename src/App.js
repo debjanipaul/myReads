@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import SearchBooks from './searchBooks';
+import BookList from './bookList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const bookshelves = [
+  { key: 'currentlyReading', name: 'Currently Reading' },
+  { key: 'wantToRead', name: 'Want to Read' },
+  { key: 'read', name: 'Read' }
+];
+class BooksApp extends React.Component {
+
+  state = {
+    books: []
+  }
+
+  componentDidMount() {
+    const api = "https://reactnd-books-api.udacity.com"
+
+    fetch(`${api}/books`)
+      .then(res => res.json())
+      .then(data => this.setState({ books: data }))
+  }
+
+  render() {
+    const { books } = this.state
+    return (
+      <Router className="app">
+        <Route exact path="/" render={() => <BookList bookshelves={bookshelves} books={books} />} />
+        <Route path="/search" render={() => <SearchBooks books={books} />} />
+      </Router>
+    );
+  }
 }
 
-export default App;
+export default BooksApp;
