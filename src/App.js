@@ -18,9 +18,14 @@ class BooksApp extends React.Component {
   componentDidMount() {
     const api = "https://reactnd-books-api.udacity.com"
 
-    fetch(`${api}/books`)
+    fetch(`${api}/books`, {
+      headers: {
+        "authorization": "whatever",
+        "Content-Type": "application/json"
+      }
+    })
       .then(res => res.json())
-      .then(data => this.setState({ books: data }))
+      .then(data => this.setState({ books: data.books }))
   }
 
   render() {
