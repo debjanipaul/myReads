@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 class SearchBooks extends React.Component {
 
     render() {
+        const { books, bookshelves } = this.props
 
         return (
             <div className="search-books">
@@ -14,7 +15,7 @@ class SearchBooks extends React.Component {
                         <input type="text" placeholder="Search by title or author" />
                     </div>
                 </div>
-                <SearchBooksResults />
+                <SearchBooksResults books={books} bookshelves={bookshelves} />
             </div>
 
         )
