@@ -5,14 +5,18 @@ import { Link } from 'react-router-dom';
 class BookShelf extends React.Component {
     render() {
         const { books, shelf } = this.props;
+        const filteredBooks = books.filter(book => {
+            return book.shelf === shelf.key
+        })
+        console.log("filteredBooks", filteredBooks)
 
         return (
             <div className="bookshelf">
                 <h2 className="bookshelf-title">{shelf.name}</h2>
                 <div className="bookshelf-books">
-                    <ol>
-                        {books.map(book => (
-                            <BooksGrid book={book} />
+                    <ol className="books-grid">
+                        {filteredBooks.map(book => (
+                            <BooksGrid book={book} key={book.id} shelf={shelf.key} />
                         ))}
                     </ol>
                 </div>
