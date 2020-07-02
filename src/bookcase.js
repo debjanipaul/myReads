@@ -9,7 +9,7 @@ class Bookcase extends React.Component {
             <div className="list-books-content">
                 <div>
                     {bookshelves.map(shelf => (
-                        <Bookshelf shelf={shelf} books={books} key={shelf.key} />
+                        <Bookshelf shelf={shelf} books={books} key={shelf.key} moveBooks={this.props.handleMove} />
                     ))}
                 </div>
             </div>

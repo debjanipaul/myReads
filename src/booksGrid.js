@@ -3,7 +3,7 @@ import BookShelfChanger from './bookShelfChanger'
 
 class BooksGrid extends React.Component {
     render() {
-        const { book, shelf } = this.props
+        const { book, shelf, handleMove } = this.props
         return (
             <div >
                 <li>
@@ -11,7 +11,7 @@ class BooksGrid extends React.Component {
                         <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                             <div className="book-shelf-changer">
-                                <BookShelfChanger book={book} shelf={shelf} />
+                                <BookShelfChanger book={book} shelf={shelf} moveBooks={handleMove} />
                             </div>
                         </div>
                         <div className="book-title">{book.title}</div>

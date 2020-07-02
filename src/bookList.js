@@ -9,7 +9,7 @@ class BookList extends React.Component {
                 <div className="list-books-title">
                     <h1>MyReads</h1>
                 </div>
-                <Bookcase books={books} bookshelves={bookshelves} />
+                <Bookcase books={books} bookshelves={bookshelves} moveBooks={this.props.handleMove} />
             </div>
         )
     }

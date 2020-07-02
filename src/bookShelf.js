@@ -16,7 +16,7 @@ class BookShelf extends React.Component {
                 <div className="bookshelf-books">
                     <ol className="books-grid">
                         {filteredBooks.map(book => (
-                            <BooksGrid book={book} key={book.id} shelf={shelf.key} />
+                            <BooksGrid book={book} key={book.id} shelf={shelf.key} moveBooks={this.props.handleMove} />
                         ))}
                     </ol>
                 </div>
