@@ -6,10 +6,11 @@ class BookShelfChanger extends React.Component {
     }
 
     handleChange = e => {
+        const newVal = e.target.value
         this.setState({
-            value: e.target.value
+            value: newVal
         })
-        this.props.moveBooks(this.props.book, e.target.value)
+        this.props.moveBooks(this.props.book, newVal)
     }
     render() {
         return (

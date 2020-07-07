@@ -15,17 +15,27 @@ class SearchBooks extends React.Component {
     };
 
     render() {
-        const { books, bookshelves, searchBooks } = this.props
+        const { books, bookshelves, searchBooks, moveBooks, resetSearch } = this.props
 
         return (
             <div className="search-books">
                 <div className="search-books-bar">
-                    <Link to='/' className="close-search">Close</Link>
+                    <Link to='/' className="close-search" onClick={resetSearch}>Close</Link>
                     <div className="search-books-input-wrapper">
-                        <input type="text" value={this.state.value} placeholder="Search by title or author" onChange={this.handleChange} />
+                        <input type="text"
+                            value={this.state.value}
+                            placeholder="Search by title or author"
+                            onChange={this.handleChange}
+                        />
                     </div>
                 </div>
-                <SearchBooksResults books={books} searchBooks={searchBooks} bookshelves={bookshelves} search={this.props.search} />
+                <SearchBooksResults
+                    books={books}
+                    searchBooks={searchBooks}
+                    moveBooks={moveBooks}
+                    bookshelves={bookshelves}
+                    search={this.props.search}
+                />
             </div>
 
         )

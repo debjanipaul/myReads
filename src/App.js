@@ -31,20 +31,18 @@ class BooksApp extends React.Component {
   }
 
   handleMove = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(
-      () => (this.setState((prevstate) => ({
-        books: prevstate.books.filter(b => {
-          if (b.id === book.id) {
-            return (book.shelf = shelf);
-          }
-          else {
-            return (book);
-          }
-        })
-      })
-      )
-      ));
-  }
+    BooksAPI.update(book, shelf);
+    if (shelf === 'none') {
+      this.setState(prevState => ({
+        books: prevState.books.filter(b => b.id !== book.id)
+      }));
+    } else {
+      book.shelf = shelf;
+      this.setState(prevState => ({
+        books: prevState.books.filter(b => b.id !== book.id).concat(book)
+      }));
+    }
+  };
 
   handleSearch = (query) => {
     if (query.length > 0) {
@@ -55,10 +53,13 @@ class BooksApp extends React.Component {
           this.setState({ searchBooks: books });
         }
       })
-
     } else {
       this.setState({ searchBooks: [] });
     }
+  }
+
+  resetSearch = () => {
+    this.setState({ searchBooks: [] });
   }
 
   render() {
@@ -78,6 +79,7 @@ class BooksApp extends React.Component {
             bookshelves={bookshelves}
             moveBooks={this.handleMove}
             search={this.handleSearch}
+            resetSearch={this.resetSearch}
           />} />
       </Router>
     );
