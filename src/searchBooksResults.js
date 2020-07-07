@@ -1,18 +1,18 @@
 import React from 'react';
-// import Bookcase from './bookcase';
 import BooksGrid from './booksGrid';
 
 class SearchBooksResults extends React.Component {
     render() {
-        const { books } = this.props
+        const { books, searchBooks } = this.props
+        console.log('searchBook', searchBooks)
         return (
             <div>
                 <div className="search-books-results">
 
                 </div>
                 <div className="books-grid">
-                    {books.map(book => (
-                        <BooksGrid book={book} key={book.id} />
+                    {searchBooks.map(book => (
+                        <BooksGrid book={book} key={book.id} shelf={book.shelf} />
                     ))}
                 </div>
             </div>

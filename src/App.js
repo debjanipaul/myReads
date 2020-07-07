@@ -13,7 +13,8 @@ const bookshelves = [
 class BooksApp extends React.Component {
 
   state = {
-    books: []
+    books: [],
+    searchBooks: []
   }
 
   componentDidMount() {
@@ -45,12 +46,39 @@ class BooksApp extends React.Component {
       ));
   }
 
+  handleSearch = (query) => {
+    if (query.length > 0) {
+      BooksAPI.search(query).then((books) => {
+        if (books.error) {
+          this.setState({ searchBooks: [] });
+        } else {
+          this.setState({ searchBooks: books });
+        }
+      })
+
+    } else {
+      this.setState({ searchBooks: [] });
+    }
+  }
+
   render() {
-    const { books } = this.state
+    const { books, searchBooks } = this.state
     return (
       <Router className="app">
-        <Route exact path="/" render={() => <BookList bookshelves={bookshelves} moveBooks={this.handleMove} books={books} />} />
-        <Route path="/search" render={() => <SearchBooks books={books} bookshelves={bookshelves} moveBooks={this.handleMove} />} />
+        <Route exact path="/" render={() =>
+          <BookList
+            bookshelves={bookshelves}
+            moveBooks={this.handleMove}
+            books={books} />}
+        />
+        <Route path="/search" render={() =>
+          <SearchBooks
+            books={books}
+            searchBooks={searchBooks}
+            bookshelves={bookshelves}
+            moveBooks={this.handleMove}
+            search={this.handleSearch}
+          />} />
       </Router>
     );
   }
