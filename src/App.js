@@ -18,16 +18,9 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    const api = "https://reactnd-books-api.udacity.com"
-
-    fetch(`${api}/books`, {
-      headers: {
-        "authorization": "whatever",
-        "Content-Type": "application/json"
-      }
+    BooksAPI.getAll().then(books => {
+      this.setState({ books: books })
     })
-      .then(res => res.json())
-      .then(data => this.setState({ books: data.books }))
   }
 
   handleMove = (book, shelf) => {
